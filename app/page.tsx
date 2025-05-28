@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="container mx-auto px-4 py-12 bg-white">
+    <main className="container mx-auto px-4 py-12">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold tracking-tight text-orange-500 sm:text-4xl mb-2">Buscador de Estabelecimentos</h1>
