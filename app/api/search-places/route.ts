@@ -55,10 +55,8 @@ async function searchPlaces(
   pageToken?: string,
 ): Promise<PlacesSearchResponse> {
   // Primeiro, geocodificar a localização para obter coordenadas
-  const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(location)}&key=AIzaSyDr5rDwW5caFCy1X0VH67_wcJsGn1PDPoY`
-  console.log(geocodeUrl)
+  const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(location)}&key=${apiKey}`
   const geocodeResponse = await axios.get(geocodeUrl)
-  console.log(geocodeResponse)
 
   if (geocodeResponse.data.status !== "OK" || !geocodeResponse.data.results[0]) {
     throw new Error("Não foi possível encontrar a localização especificada")
@@ -190,8 +188,7 @@ async function generateExcel(places: PlaceSearchResult[]): Promise<Buffer> {
 
 export async function POST(request: NextRequest) {
   try {
-    const apiKey = "AIzaSyDr5rDwW5caFCy1X0VH67_wcJsGn1PDPoY"
-
+    const apiKey = process.env.GOOGLE_MAPS_API_KEY
     if (!apiKey) {
       return NextResponse.json({ message: "Chave da API do Google Maps não configurada" }, { status: 500 })
     }
